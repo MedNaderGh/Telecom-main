@@ -1,0 +1,40 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Liste Favoris</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-list>
+        <ion-item-sliding *ngFor="let promotion of promotion">
+          <div *ngFor="let favoris of favoris">
+          <ion-item  *ngIf="favoris.id_prom === promotion._id && favoris.id_user === userDetails._id">
+            <ion-card>
+                
+              <div style="text-align: right;"  >
+              <ion-icon  (click)="delete(favoris._id)" style="size: 15px;color:black" name="trash"  slot="end"></ion-icon></div>
+                <img src="{{promotion.img}}"/>
+                <strong>{{distance(promotion.Longitude,promotion.Latitude)}} Km</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              
+                <ion-card-header>{{promotion.name}}</ion-card-header>
+                <ion-label><strong><span style="text-decoration: line-through; font-size: 22px;
+                  font-weight: 700;
+                  text-transform: uppercase;
+                  display: inline-block;">{{promotion.prixas}}<sup>DT</sup> </span>    <span style="color: #d00ff7;font-size: 22px;
+                  font-weight: 700;
+                  text-transform: uppercase;
+                  display: inline-block;">&nbsp;&nbsp;&nbsp;{{promotion.prixas - (promotion.prixas/ 100)*promotion.reduction }}   <sup>DT</sup></span><span class="blink_me">&nbsp;&nbsp;{{promotion.reduction}}% </span></strong></ion-label>
+                  <!--{{partenaire.siteweb}}*/-->
+                  <ion-button  color="secondary" (click)="onOrderDelete(promotion._id)">
+                      <ion-icon name="eye" slot="start"></ion-icon>
+                      <ion-label>Plus de detail</ion-label>
+                    </ion-button>
+            </ion-card>
+          </ion-item>
+        </div>
+        </ion-item-sliding>
+      </ion-list>
+</ion-content>

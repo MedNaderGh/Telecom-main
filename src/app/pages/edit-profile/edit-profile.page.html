@@ -1,0 +1,108 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Edit Profile</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="profile">
+  <ion-card no-margin>
+    <ion-card-content class="bg-profile">
+      <h1 class="fw500">{{userDetails.fullName}}</h1>
+      <h2 color="light" margin-bottom>Utilisateur</h2>
+    </ion-card-content>
+  
+    <ion-grid fixed no-padding>
+      <ion-row>
+        <ion-col size="12" padding>
+
+          <ion-list margin-bottom>
+
+            <form [formGroup]="onRegisterForm" class="list-form">
+              <ion-item no-padding class="animated fadeInUp">
+                <ion-label position="floating">
+                  <ion-icon name="contact" item-start></ion-icon>
+                  Nom et Prenom
+                </ion-label>
+                <ion-input color="secondary" type="text" formControlName="fullName"></ion-input>
+              </ion-item>
+              <p ion-text class="text08" *ngIf="onRegisterForm.get('fullName').touched && onRegisterForm.get('fullName').hasError('required')">
+                <ion-text color="warning">
+                  *champ obligatoire
+                </ion-text>
+              </p>
+        
+              <ion-item no-padding class="animated fadeInUp">
+                <ion-label position="floating">
+                  <ion-icon name="mail" item-start></ion-icon>
+                  Email
+                </ion-label>
+                <ion-input color="secondary" type="email" formControlName="email" ></ion-input>
+              </ion-item>
+              <p ion-text class="text08" *ngIf=" onRegisterForm.get('email').touched && onRegisterForm.get('email').hasError('required')">
+                <ion-text color="warning">
+                  *champ obligatoire
+                </ion-text>
+              </p>
+              <ion-item no-padding class="animated fadeInUp">
+                <ion-label position="floating">
+                  <ion-icon name="lock" item-start></ion-icon>
+                  Nouveau mot de passe
+                </ion-label>
+                <ion-input color="secondary" type="password" formControlName="password" ></ion-input>
+              </ion-item>
+              <p ion-text class="text08" *ngIf="onRegisterForm.get('password').touched && onRegisterForm.get('password').hasError('required')">
+                <ion-text color="warning">
+                  *champ obligatoire
+                </ion-text>
+              </p>
+              <ion-item no-padding class="animated fadeInUp">
+                <ion-label position="floating">
+                  <ion-icon name="lock" item-start></ion-icon>
+                  Confirmer nouveau mot de passe
+                </ion-label>
+                <ion-input color="secondary" type="password" formControlName="password2" ></ion-input>
+              </ion-item>
+              <p ion-text class="text08" *ngIf="onRegisterForm.get('password2').touched && onRegisterForm.hasError('notSame')">
+                <ion-text color="warning">
+                  *Les deux mot de passes ne correspont pas
+                </ion-text>
+              </p>
+              <ion-item no-padding class="animated fadeInUp">
+                <ion-label position="floating">
+                  <ion-icon name="calendar" item-start></ion-icon>
+                  Date de naissance
+                </ion-label>
+                  <ion-datetime style="color:rgb(10, 10, 10)" :pickerOptions="customPickerOptions"  formControlName="dnaiss"></ion-datetime>
+                </ion-item>    
+                  <p ion-text class="text08" *ngIf="onRegisterForm.get('dnaiss').touched && onRegisterForm.get('dnaiss').hasError('required')">
+                <ion-text color="warning">
+                  *champ obligatoire
+                </ion-text>
+              </p>
+              <ion-item no-padding class="animated fadeInUp">
+                <ion-label position="floating">
+                  <ion-icon name="call" item-start></ion-icon>
+                  Numero de téléphone
+                </ion-label>
+                <ion-input color="secondary" type="tel" formControlName="tel" ></ion-input>
+              </ion-item>
+              <p ion-text class="text08" *ngIf="onRegisterForm.get('tel').touched && onRegisterForm.get('tel').hasError('required')">
+                <ion-text color="warning">
+                  *champ obligatoire
+                </ion-text>
+              </p>
+            </form>
+          </ion-list>
+
+          
+  
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  
+    <ion-button size="large" expand="full" color="dark" (click)="sendData(onRegisterForm.get('fullName').value,onRegisterForm.get('email').value,onRegisterForm.get('password2').value,onRegisterForm.get('dnaiss').value,onRegisterForm.get('tel').value,userDetails._id)" no-margin [disabled]="">Edit</ion-button>
+  </ion-card>
+</ion-content>

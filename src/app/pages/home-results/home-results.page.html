@@ -1,0 +1,86 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button color="secondary"></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+        <ion-text color="light">
+          <ion-text color="light" class="fw700">TT-VIS</ion-text>
+        </ion-text>
+    </ion-title>
+    <!--<ion-buttons slot="end">
+      <ion-button size="small" shape="round" color="medium" (click)="notifications()">
+        <ion-icon name="notifications"></ion-icon>
+        <ion-badge color="dark" slot="end">2</ion-badge>
+      </ion-button>
+    </ion-buttons>-->
+  </ion-toolbar>
+</ion-header>
+<ion-content padding >
+ <ion-button (click)=change() expand="full">Tous Les promotions/promotions proches</ion-button>
+ <div style="text-align:center;margin: 0 auto;">
+ <ion-text *ngIf="km=== 60" ><strong>Les promotions proches</strong></ion-text>
+ <ion-text *ngIf="km=== 1000" ><strong>Toutes les promotions</strong></ion-text></div>
+  <ion-list>
+      <ion-item-sliding *ngFor="let promotion of promotion">
+        <ion-item  *ngIf="((check(promotion.Longitude,promotion.Latitude)&& (searchKey === ''))||(searchKey != '' && promotion.name.includes(searchKey))); else seter() ">
+          <ion-card>  
+            <div   style="text-align: right;" >
+            </div>
+            <!--<div style="text-align: right;" *ngIf=!isfav(promotion._id,userDetails._id)>
+              <ion-icon  (click)="test(promotion._id,userDetails._id)" name="heart-empty" style="color:red;"slot="end"></ion-icon></div>-->
+              
+              <strong>{{distance(promotion.Longitude,promotion.Latitude)}} Km</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            
+              <ion-card-header>{{promotion.name}}</ion-card-header>
+              <ion-label><strong><span style="text-decoration: line-through; font-size: 22px;
+                font-weight: 700;
+                text-transform: uppercase;
+                display: inline-block;color :rgb(152, 151, 153)">{{promotion.prixas}}<sup>DT</sup> </span>    <span style="color: #000000;font-size: 22px;
+                font-weight: 700;
+                text-transform: uppercase;
+                display: inline-block;">&nbsp;&nbsp;&nbsp;{{promotion.prixas - (promotion.prixas/ 100)*promotion.reduction }}   <sup>DT</sup></span><span class="blink_me">&nbsp;&nbsp;{{promotion.reduction}}% </span></strong></ion-label>
+                <!--{{partenaire.siteweb}}*/-->
+                <ion-button  color="secondary" (click)="onOrderDelete(promotion._id)">
+                    <ion-icon name="eye" slot="start"></ion-icon>
+                    <ion-label>Plus de detail</ion-label>
+                  </ion-button>
+          </ion-card>
+        </ion-item>
+      </ion-item-sliding>
+      <div *ngIf="error"><strong>Aucune promotion trouvée</strong></div> 
+    </ion-list>
+</ion-content>
+<!--<ion-content>
+  <ion-card no-margin class="no-radius">
+    <ion-item lines="none" color="medium">
+      <ion-label>
+        <h2 no-margin class="fw500 no-margin">
+          <ion-text color="dark">Alert / Toast test</ion-text>
+        </h2>
+
+        <p class="text-11x no-margin">
+          <ion-text  color="primary">{{yourLocation}}</ion-text>
+        </p>
+      </ion-label>
+      <ion-button shape="round" fill="outline" size="small" color="primary" (click)="alertLocation()">
+        Location
+        <ion-icon name="locate"></ion-icon>
+      </ion-button>
+    </ion-item>
+  </ion-card>
+{{r}}
+  <ion-card class="bg-white">
+    <ion-img [src]="themeCover"></ion-img>
+    <ion-button expand="full" color="dark" (click)="presentImage(themeCover)" no-margin>
+      Modal 1: Modal Image
+    </ion-button>
+  </ion-card>
+
+  <ion-button margin shape="round" expand="full" color="secondary" (click)="searchFilter()">
+    Modal 2: Search Filter
+  </ion-button>
+  
+  <popmenu></popmenu>
+</ion-content>-->
+  

@@ -1,0 +1,77 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Detail</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+<img src="{{test.img}}"/>
+<span style="font-size: 20px; color: blue">
+  <ion-icon name="people" color="primary"></ion-icon> <sup>{{count}} Profiteurs</sup>
+     </span>
+<div class="hr"> </div>
+  {{test.name}}<br>
+  <div class="hr"> </div>
+  <strong><span style="text-decoration: line-through; font-size: 22px;
+                font-weight: 700;
+                text-transform: uppercase;
+                display: inline-block; color:rgb(152, 151, 153)">{{test.prixas}}<sup>DT</sup> </span>    <span style="color: #000000;font-size: 22px;
+                font-weight: 700;
+                text-transform: uppercase;
+                display: inline-block;">&nbsp;&nbsp;&nbsp;{{test.prixas - (test.prixas/ 100)*test.reduction }}   <sup>DT</sup></span><span class="blink_me">&nbsp;&nbsp;{{test.reduction}}% </span></strong><br>
+ <div class="hr"> </div>
+ 
+ {{test.description}} 
+ <div class="hr"> </div>
+ Temps rester pour profiter :
+ <br>
+ <div id="timer">
+  <span id="days">{{_days}}</span>jrs
+  <span id="hours">{{_hours}}</span>hr
+  <span id="minutes">{{_minutes}}</span>min
+  <span id="seconds">{{_seconds}}</span>s
+</div> 
+<div class="hr"> </div>
+<strong>Adresse : </strong> {{test.adresse}}
+<div class="hr"> </div>
+<div style="text-align: center;">
+  <ion-button color="primary"  class="activated"  (click)="addprof(test._id,userDetails._id,test.lien);">
+    <ion-icon name="flame" ></ion-icon>
+    <ion-label>Profiter</ion-label>
+  </ion-button>
+</div>
+laissez un commentaire :
+<form [formGroup]="commentForm">
+<rating formControlName="rate"
+        readonly="false" 
+        size="1" 
+        (rateChange)="onRateChange($event)">
+</rating>
+<ion-input color="secondary" type="hidden" formControlName="id" text-center></ion-input>
+<ion-input color="secondary" type="hidden" formControlName="name" text-center></ion-input>
+<ion-input color="secondary" type="hidden" formControlName="idp" text-center></ion-input>
+
+<ion-item>
+  <ion-input type="text" placeholder="commentaire :" formControlName="commentaire"></ion-input>
+  <ion-button clear item-right (click)="commenter(commentForm)">Commenter</ion-button>
+ </ion-item>
+ </form>
+ <ion-list *ngFor="let cmnt of cmnt">
+ <ion-item>
+  <ion-avatar slot="start">
+    <img src="assets/img/avatar.png">
+  </ion-avatar>
+  <ion-label><h3>{{cmnt.name_user}}</h3>
+  <p>{{cmnt.Commentaire}}</p>
+  <p>{{cmnt.date.slice(0, -5).replace('T',' ')}}</p>
+</ion-label>
+</ion-item>
+<rating rate="{{cmnt.rate}}"
+        readonly="true" 
+        size="min" 
+        (rateChange)="onRateChange($event)"></rating>
+</ion-list>
+</ion-content>

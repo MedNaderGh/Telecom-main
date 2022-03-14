@@ -1,0 +1,30 @@
+<ion-header>
+    <ion-toolbar color="primary">
+      <ion-buttons slot="start">
+        <ion-back-button></ion-back-button>
+      </ion-buttons>
+      <ion-title>Partenaires</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+<ion-content padding>
+    <ion-list>
+        <ion-item-sliding *ngFor="let partenaire of partenaire">
+          <ion-item>
+            <ion-card>
+                <img src="{{partenaire.img}}"/>
+                <ion-card-header>{{partenaire.name}}</ion-card-header>
+                <ion-label><strong>Adresse : {{partenaire.Adress}}</strong></ion-label>
+                <ion-card-content>
+                  {{partenaire.description}}
+                  </ion-card-content>
+                  <!--{{partenaire.siteweb}}*/-->
+                  <ion-item href="{{partenaire.siteweb}}" class="activated" >
+                      <ion-icon name="globe" slot="start"></ion-icon>
+                      <ion-label>Siteweb</ion-label>
+                    </ion-item>
+            </ion-card>
+          </ion-item>
+        </ion-item-sliding>
+      </ion-list>
+</ion-content>

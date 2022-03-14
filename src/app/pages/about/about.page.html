@@ -1,0 +1,64 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Nous Contacter</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-card class="bg-white" no-margin>
+    <ion-card-content>
+      <h1 margin-bottom>
+        <ion-text color="primary" ><strong>Interface de repport des bugs et suggestion pour l'admin</strong></ion-text>
+      </h1>
+        <form [formGroup]="contactForm" class="list-form">
+          <ion-item no-padding class="animated fadeInUp">
+            <ion-label position="floating">
+              <ion-icon name="clipboard" item-start></ion-icon>
+              Sujet
+            </ion-label>
+            <ion-input color="secondary" type="text" formControlName="sujet" text-center></ion-input>
+          </ion-item>
+          <p ion-text class="text08" *ngIf="!contactForm.get('sujet').valid && contactForm.get('sujet').touched ">
+            <ion-text color="warning">
+              *Champ obligatoire
+            </ion-text>
+          </p>
+          <ion-item no-padding class="animated fadeInUp">
+            <ion-label position="floating">
+              <ion-icon name="mail" item-start></ion-icon>
+              Email
+            </ion-label>
+            <ion-input color="secondary" type="email" formControlName="email" text-center></ion-input>
+          </ion-item>
+          <p ion-text class="text08" *ngIf="!contactForm.get('email').valid && contactForm.get('email').touched ">
+            <ion-text color="warning">
+              *Champ obligatoire
+            </ion-text>
+          </p>
+          <ion-input color="secondary" type="hidden" formControlName="id" text-center></ion-input>
+          <ion-input color="secondary" type="hidden" formControlName="name" text-center></ion-input>
+          <ion-item no-padding class="animated fadeInUp">
+            <ion-label position="floating">
+              <ion-icon name="paper" item-start></ion-icon>
+              Message
+            </ion-label>
+            <ion-textarea color="secondary"  formControlName="msg" text-center></ion-textarea>
+          </ion-item>
+          <p ion-text class="text08" *ngIf="!contactForm.get('msg').valid && contactForm.get('msg').touched ">
+            <ion-text color="warning">
+              *Champ obligatoire
+            </ion-text>
+          </p>
+          <ion-button icon-left size="medium" expand="full" shape="round" color="dark" (click)= "envoyer(contactForm) "[disabled]="!contactForm.valid" tappable>
+            <ion-icon name="send"></ion-icon>
+            envoyer
+          </ion-button>   
+</form>  
+    </ion-card-content>
+  </ion-card>
+
+</ion-content>

@@ -1,0 +1,56 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+        <ion-button color="primary" (click)="closeModal()">
+            <ion-icon name="close" color="light"></ion-icon>
+        </ion-button>
+    </ion-buttons>
+    <ion-title>
+    	Recherche avancée
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content padding>
+  <ion-item margin-bottom>
+    <ion-label color="primary" stacked>
+    	<ion-text color="dark" class="fw500">Mot clé</ion-text>
+    </ion-label>
+    <ion-input type="text" placeholder="Mot a rechercher" [(ngModel)]="mot"></ion-input>
+  </ion-item>
+
+	<ion-item>
+	  <ion-label class="no-margin-bottom" stacked>
+      <ion-text color="dark" class="fw500">Distance:</ion-text>
+    </ion-label>
+    <ion-range min="1" max="300" step="1" value="1" class="no-padding-top" [(ngModel)]="radius">
+      <ion-label slot="start"><ion-text color="primary"> {{radius}} Km(s)</ion-text></ion-label>
+    </ion-range>
+	</ion-item>
+
+	<ion-item>
+	  <ion-label class="fw500" color="dark">Categorie :</ion-label>
+	  <ion-select [(ngModel)]="category">
+	    <ion-select-option *ngFor="let categorie of categorie">{{categorie.name}}</ion-select-option>
+	  </ion-select>
+	</ion-item>
+
+	<ion-item>
+	  <ion-label class="fw500" color="dark">Partenaire :</ion-label>
+	  <ion-select [(ngModel)]="part" >
+	    <ion-select-option *ngFor="let partenaire of partenaire">{{partenaire.name}}</ion-select-option>
+	  </ion-select>
+	</ion-item>
+
+	<ion-item>
+			<ion-label class="no-margin-bottom" stacked>
+				<ion-text color="dark" class="fw500">Reduction:</ion-text>
+			</ion-label>
+			<ion-range min="1" max="90" step="1" value="50" class="no-padding-top" [(ngModel)]="solde">
+				<ion-label slot="start"><ion-text color="primary"> {{solde}} %</ion-text></ion-label>
+			</ion-range>
+		</ion-item>
+
+	<ion-button expand="full" color="primary" (click)="search(mot,radius,category,part,solde)">Rechercher</ion-button>
+</ion-content>
