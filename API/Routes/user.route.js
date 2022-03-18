@@ -41,6 +41,13 @@ userRoutes.route('/addstation').post(function (req, res) {
     res.status(400).send("erreur");
     });
 });
+userRoutes.route('/getstations').get(function (req, res) {
+  Station.find(function (err, station) {
+    if (err) {res.send('error');
+  next();}
+    res.json(station);
+  });
+});
 userRoutes.post('/login',(req,res,next)=>{
   passport.authenticate('local', (err, user, info)=> {
     if (err) { return res.status(501).json(err); }
