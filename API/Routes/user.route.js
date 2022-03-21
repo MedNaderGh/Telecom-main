@@ -41,6 +41,46 @@ userRoutes.route('/addstation').post(function (req, res) {
     res.status(400).send("erreur");
     });
 });
+userRoutes.put('/updatestation/:id',  function (req, res) {
+  if (!ObjectId.isValid(req.params.id))
+      return res.status(400).send(`aucun id trouvee : ${req.params.id}`);
+    Station.findByIdAndUpdate(req.params.id, { $set: req.body }, { new: true }, (err, doc) => {
+      if (!err) { res.send(doc); }
+      else { console.log('Error in  Update :' + JSON.stringify(err, undefined, 2)); }
+  });
+});
+userRoutes.post('/validateuser/:id',  function (req, res) {
+  if (!ObjectId.isValid(req.params.id))
+      return res.status(400).send(`aucun id trouvee : ${req.params.id}`);
+    User.findByIdAndUpdate(req.params.id, { authorized: true }, { new: true }, (err, doc) => {
+      if (!err) { res.send(doc); }
+      else { console.log('Error in  Update :' + JSON.stringify(err, undefined, 2)); }
+  });
+});
+userRoutes.post('/unvalidateuser/:id',  function (req, res) {
+  if (!ObjectId.isValid(req.params.id))
+      return res.status(400).send(`aucun id trouvee : ${req.params.id}`);
+    User.findByIdAndUpdate(req.params.id, { authorized: false }, { new: true }, (err, doc) => {
+      if (!err) { res.send(doc); }
+      else { console.log('Error in  Update :' + JSON.stringify(err, undefined, 2)); }
+  });
+});
+userRoutes.delete('/deleteuser/:id',  function (req, res) {
+  if (!ObjectId.isValid(req.params.id))
+      return res.status(400).send(`aucun id trouvee : ${req.params.id}`);
+      User.findByIdAndRemove({_id: req.params.id}, function(err, station){
+        if(err) res.json(err);
+        else res.json('Successfully removed');
+    });
+});
+userRoutes.delete('/deletestation/:id',  function (req, res) {
+  if (!ObjectId.isValid(req.params.id))
+      return res.status(400).send(`aucun id trouvee : ${req.params.id}`);
+      Station.findByIdAndRemove({_id: req.params.id}, function(err, station){
+        if(err) res.json(err);
+        else res.json('Successfully removed');
+    });
+});
 userRoutes.route('/getstations').get(function (req, res) {
   Station.find(function (err, station) {
     if (err) {res.send('error');
