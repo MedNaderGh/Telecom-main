@@ -5,12 +5,12 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { IonicModule } from '@ionic/angular';
 import { BarRatingModule } from "ngx-bar-rating";
-import { PromoPage } from './promo.page';
+import { StationPage } from './station.page';
 import { IonicRatingModule } from 'ionic4-rating';
 const routes: Routes = [
   {
     path: '',
-    component: PromoPage
+    component: StationPage
   }
 ];
 
@@ -24,6 +24,6 @@ const routes: Routes = [
     IonicModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [PromoPage]
+  declarations: [StationPage]
 })
-export class PromoPageModule {}
+export class StationPageModule {}

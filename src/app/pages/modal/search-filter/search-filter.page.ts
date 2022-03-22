@@ -28,14 +28,14 @@ export class SearchFilterPage implements OnInit {
         console.log("erreur");
       }
     });
-    this.http.get(`${this.user.uri}/getpart`).subscribe(data => {
+    /* this.http.get(`${this.user.uri}/getpart`).subscribe(data => {
       this.partenaire = data;
       console.log(this.partenaire);
     }, err => {
       if(err.status === 401) {
         console.log("erreur");
       }
-    });  
+    });  */ 
   }
 
   closeModal() {

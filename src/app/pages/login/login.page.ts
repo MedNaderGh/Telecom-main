@@ -110,7 +110,8 @@ export class LoginPage implements OnInit {
       localStorage.setItem('jwtToken', this.data.token);
       this.router.navigate(['/home-results']);
     }, err => {
-      this.logeToast()
+      console.log(err)
+      this.logeToast(err.error.msg)
     });
   }
   async logsToast() {
@@ -120,9 +121,9 @@ export class LoginPage implements OnInit {
     });
     toast.present();
   }
-  async logeToast() {
+  async logeToast(msg) {
     const toast = await this.toastCtrl.create({
-      message: 'login ou mot de passe est incorrecte',
+      message: msg,
       duration: 2000
     });
     toast.present();

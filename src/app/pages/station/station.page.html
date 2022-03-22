@@ -1,0 +1,128 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button color="secondary"></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Modifier La station</ion-title>
+  </ion-toolbar>
+</ion-header>
+<div class="auth-content">
+  <div padding-horizontal text-center>
+    <div class="logo"></div>
+    <h3 no-margin>
+      <ion-text color="light" class="fw700">
+        <ion-text color="Light">Inscription</ion-text>
+      </ion-text>
+    </h3>
+  </div>
+  <form [formGroup]="onStationForm" class="list-form">
+    <ion-item no-padding class="animated fadeInUp">
+      <ion-label position="floating">
+        Numero
+      </ion-label>
+      <ion-input color="secondary" type="number" formControlName="Numero"></ion-input>
+    </ion-item>
+    <p ion-text class="text08" *ngIf="onStationForm.get('Numero').touched && onStationForm.get('Numero').hasError('required')">
+      <ion-text color="warning">
+        *champ obligatoire
+      </ion-text>
+    </p>
+
+    <ion-item no-padding class="animated fadeInUp">
+      <ion-label position="floating">
+        Type
+      </ion-label>
+      <ion-input color="secondary" type="text" formControlName="Type" ></ion-input>
+    </ion-item>
+    <p ion-text class="text08" *ngIf=" onStationForm.get('Type').touched && onStationForm.get('Type').hasError('required')">
+      <ion-text color="warning">
+        *champ obligatoire
+      </ion-text>
+    </p>
+    <ion-item no-padding class="animated fadeInUp">
+      <ion-label position="floating">
+        Nom
+      </ion-label>
+      <ion-input color="secondary" type="text" formControlName="Nom" ></ion-input>
+    </ion-item>
+    <p ion-text class="text08" *ngIf="onStationForm.get('Nom').touched && onStationForm.get('Nom').hasError('required')">
+      <ion-text color="warning">
+        *champ obligatoire
+      </ion-text>
+    </p>
+    <ion-item no-padding class="animated fadeInUp">
+      <ion-label position="floating">
+        Transmission
+      </ion-label>
+      <ion-input color="secondary" type="Number" formControlName="Transmission" ></ion-input>
+      </ion-item>    
+        <p ion-text class="text08" *ngIf="onStationForm.get('Transmission').touched && onStationForm.get('Transmission').hasError('required')">
+      <ion-text color="warning">
+        *champ obligatoire
+      </ion-text>
+    </p>
+    <ion-item no-padding class="animated fadeInUp">
+      <ion-label position="floating">
+        Capacite
+      </ion-label>
+      <ion-input color="secondary" type="Number" formControlName="Capacite" ></ion-input>
+    </ion-item>
+    <p ion-text class="text08" *ngIf="onStationForm.get('Capacite').touched && onStationForm.get('Capacite').hasError('required')">
+      <ion-text color="warning">
+        *champ obligatoire
+      </ion-text>
+    </p>
+    <ion-item no-padding class="animated fadeInUp">
+      <ion-label position="floating">
+        Bande
+      </ion-label>
+      <ion-input color="secondary" type="Number" formControlName="Bande" ></ion-input>
+    </ion-item>
+    <p ion-text class="text08" *ngIf="onStationForm.get('Bande').touched && onStationForm.get('Bande').hasError('required')">
+      <ion-text color="warning">
+        *champ obligatoire
+      </ion-text>
+    </p>
+    <ion-item no-padding class="animated fadeInUp">
+      <ion-label position="floating">
+        Configuration
+      </ion-label>
+      <ion-input color="secondary" type="Text" formControlName="Capacite" ></ion-input>
+    </ion-item>
+    <p ion-text class="text08" *ngIf="onStationForm.get('Configuration').touched && onStationForm.get('Configuration').hasError('required')">
+      <ion-text color="warning">
+        *champ obligatoire
+      </ion-text>
+    </p>
+    <ion-item no-padding class="animated fadeInUp">
+      <ion-label position="floating">
+        Acceptance
+      </ion-label>
+      <ion-input color="secondary" type="text" formControlName="Acceptance" ></ion-input>
+    </ion-item>
+    <p ion-text class="text08" *ngIf="onStationForm.get('Acceptance').touched && onStationForm.get('Acceptance').hasError('required')">
+      <ion-text color="warning">
+        *champ obligatoire
+      </ion-text>
+    </p>
+  </form>
+  <div margin-top>
+    <ion-button icon-left size="medium" expand="full" shape="round" color="dark" (click)="inscrit(onStationForm)"  [disabled]="!onStationForm.valid"
+      tappable>
+      <ion-icon name="log-in"></ion-icon>
+      S'inscrire
+    </ion-button>
+   
+  </div>
+  <div text-center margin-top>
+    <span (click)="goToLogin()" tappable>
+      <ion-text color="light">
+        <br>
+    
+        <strong >J'ai déja un compte!</strong>
+      </ion-text>
+    </span>
+  </div>
+</div>
+<ion-content padding>
+</ion-content>

@@ -3,11 +3,11 @@ import { NavController, MenuController, ToastController, AlertController, Loadin
 import { HttpHeaders ,HttpClient } from '@angular/common/http';
 import { UserService } from '../user.service';
 @Component({
-  selector: 'app-partenaires',
-  templateUrl: './partenaires.page.html',
-  styleUrls: ['./partenaires.page.scss'],
+  selector: 'app-test-debit',
+  templateUrl: './test-debit.page.html',
+  styleUrls: ['./test-debit.page.scss'],
 })
-export class PartenairesPage implements OnInit {
+export class TestDebitPage implements OnInit {
   partenaire: any;
   constructor(
     private http: HttpClient,
@@ -20,14 +20,6 @@ export class PartenairesPage implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.http.get(`${this.user.uri}/getpart`).subscribe(data => {
-      this.partenaire = data;
-      console.log(this.partenaire);
-    }, err => {
-      if(err.status === 401) {
-        console.log("erreur");
-      }
-    });
   }
 
 }

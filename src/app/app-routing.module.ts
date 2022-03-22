@@ -8,8 +8,8 @@ const routes: Routes = [
   { path: 'settings', loadChildren: './pages/settings/settings.module#SettingsPageModule' },
   { path: 'edit-profile', loadChildren: './pages/edit-profile/edit-profile.module#EditProfilePageModule' },
   { path: 'home-results', loadChildren: './pages/home-results/home-results.module#HomeResultsPageModule' },
-  { path: 'partenaires', loadChildren: './pages/partenaires/partenaires.module#PartenairesPageModule' },
-  { path: 'promo', loadChildren: './pages/promo/promo.module#PromoPageModule' },
+  { path: 'test-debit', loadChildren: './pages/test-debit/test-debit.module#TestDebitPageModule' },
+  { path: 'station', loadChildren: './pages/station/station.module#StationPageModule' },
   { path: 'recherche', loadChildren: './pages/recherche/recherche.module#RecherchePageModule' },
   { path: 'tracabilite', loadChildren: './pages/tracabilite/tracabilite.module#TracabilitePageModule' },
 ];

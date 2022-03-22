@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectorRef, Output } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, Output, OnChanges } from '@angular/core';
 import { UserService } from './pages/user.service';
 import { HttpHeaders,HttpClient } from '@angular/common/http';
 import { Platform, NavController } from '@ionic/angular';
@@ -14,7 +14,7 @@ import { interval } from 'rxjs';
   templateUrl: 'app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit{
+export class AppComponent implements OnInit,OnChanges{
   public appPages: Array<Pages>;
 
   constructor(
@@ -25,8 +25,6 @@ export class AppComponent implements OnInit{
     public navCtrl: NavController,
     private user: UserService, private router: Router,private http: HttpClient,private ref: ChangeDetectorRef
   ) {
-     interval(100).subscribe(x =>
-      this.ngOnInit());
     this.appPages = [
       {
         title: 'Home',
@@ -35,23 +33,10 @@ export class AppComponent implements OnInit{
         icon: 'home'
       },
       {
-        title: 'Nous Contacter',
-        url: '/about',
+        title: 'Test Débit',
+        url: '/test-debit',
         direct: 'forward',
-        icon: 'mail'
-      },
-
-      {
-        title: 'Liste Favoris',
-        url: '/settings',
-        direct: 'forward',
-        icon: 'heart'
-      },
-      {
-        title: 'Partenaires',
-        url: '/partenaires',
-        direct: 'forward',
-        icon: 'people'
+        icon: 'swap'
       },
       {
         title: 'Consulter traçabilité',
@@ -66,19 +51,21 @@ export class AppComponent implements OnInit{
   @Output()
   userDetails: any;
   ttt:any;
+  ngOnChanges(){
+    let httpOptions = {
+      headers: new HttpHeaders({ 'Authorization': localStorage.getItem('jwtToken') })
+    };
+    this.http.get(`${this.user.uri}/userProfile`,httpOptions).subscribe(
+      data => {
+        this.userDetails = data;
+      },
+      err => { 
+        console.log(err);
+        
+      }
+    );
+  }
     ngOnInit() {
-      let httpOptions = {
-        headers: new HttpHeaders({ 'Authorization': localStorage.getItem('jwtToken') })
-      };
-      this.http.get(`${this.user.uri}/userProfile`,httpOptions).subscribe(
-        data => {
-          this.userDetails = data;
-        },
-        err => { 
-          console.log(err);
-          
-        }
-      );
     }
   initializeApp() {
     this.platform.ready().then(() => {

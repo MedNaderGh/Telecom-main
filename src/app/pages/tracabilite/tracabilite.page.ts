@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Map, latLng, tileLayer, Layer, marker ,icon} from 'leaflet';
 import * as L from 'leaflet';
+import { Router } from "@angular/router";
+import { NavController} from '@ionic/angular';
 import { HttpHeaders ,HttpClient } from '@angular/common/http';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { UserService } from '../user.service';
@@ -39,11 +41,11 @@ var blueicon = L.icon({
 export class TracabilitePage implements OnInit {
   
   map: Map;
-  promotion: any;
+  stations: any;
   lat:any;
   lng:any;
   constructor(    private user: UserService,
-    public http: HttpClient,private geolocation: Geolocation,private nativeGeocoder: NativeGeocoder) { }
+    public http: HttpClient,private geolocation: Geolocation,private nativeGeocoder: NativeGeocoder,private router: Router,public navCtrl: NavController,) { }
 
   ngOnInit() {
     this.loadmap();
@@ -51,18 +53,23 @@ export class TracabilitePage implements OnInit {
   }
   loadmap() {
     setTimeout(() => {
-      this.map = new Map('map').setView([34.009508, 9.4289231], 13);
+      this.map = new Map('map').setView([34.009508, 9.4289231], 7);
       this.map.invalidateSize();
       tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+        attribution: 'Map',
         maxZoom: 18
       }).addTo(this.map);
-      this.http.get(`${this.user.uri}/getprom`).subscribe(data => {
-        this.promotion = data;
-        for(let x of this.promotion){
-        L.marker([x.Latitude
-          , x.Longitude],{icon:blueicon}).addTo(this.map)
-        .bindPopup(x.name)
+      this.http.get(`${this.user.uri}/getstations`).subscribe(data => {
+        this.stations = data;
+        for(let x of this.stations){
+          var geojsonMarkerOptions = {
+            icon:blueicon,
+            myCustomId: x,
+          };
+        L.marker([x.Lat
+          , x.Lng],{icon:blueicon}).addTo(this.map).on("click", e => {
+            this.router.navigateByUrl("/station",{ state: x });
+          });
         }
       });
       this.geolocation.getCurrentPosition({  maximumAge: 300000,timeout: 30000, enableHighAccuracy: true }).then((resp) => {
@@ -77,4 +84,7 @@ export class TracabilitePage implements OnInit {
         
     }, 50);
   }
+goToRegister(){
+  this.navCtrl.navigateRoot('/');
+}
 }

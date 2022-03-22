@@ -122,7 +122,10 @@ userRoutes.post('/signin', function(req, res) {
     if (err) throw err;
     if (!user) {
       res.status(401).send({success: false, msg: 'utilisateur non trouvee.'});
-    } else {
+    } else if (user.authorized === false) {
+      res.status(401).send({success: false, msg: 'utilisateur non authorizé.'});
+    } 
+   else {
       // check if password matches
         if ( user.verifyPassword(req.body.password)) {
           
@@ -282,13 +285,13 @@ userRoutes.route('/comment').post(function (req, res) {
     res.status(400).send("erreur");
     });
 });
-userRoutes.get('/getpart',  function(req, res) {
+/* userRoutes.get('/getpart',  function(req, res) {
   Partenaire.find(function (err, partenaire) {
     if (err) {res.send('error');
   next();}
     res.json(partenaire);
   });
-})
+}) */
 userRoutes.get('/getemps',  function(req, res) {
   User.find(function (err, user) {
     if (err) {res.send('error');
